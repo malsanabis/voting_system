@@ -1,0 +1,130 @@
+/* User Management Styles */
+.user-management-container {
+  width: 100%;
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* Input styles */
+.username-input,
+.password-input,
+.full-name-input,
+.age-input,
+.id-number-input,
+.search-input,
+.category-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Cairo, sans-serif;
+  background: #fff;
+  text-align: right;
+}
+
+.username-input:focus,
+.password-input:focus,
+.full-name-input:focus,
+.age-input:focus,
+.id-number-input:focus,
+.search-input:focus,
+.category-select:focus {
+  outline: none;
+  border-color: #d7b08e;
+  box-shadow: 0 0 0 3px rgba(215, 176, 142, 0.1);
+}
+
+/* Button styles */
+.state-layer {
+  background: #d7b08e;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.state-layer:hover {
+  background: #c59d7a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.state-layer:active {
+  transform: translateY(0);
+}
+
+/* Table styles */
+.cell-category,
+.cell-votes,
+.data-category,
+.data-votes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.cell-category,
+.cell-votes {
+  font-weight: 700;
+  color: #374151;
+}
+
+.data-category,
+.data-votes {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Text category styles */
+.text-category {
+  flex-shrink: 0;
+  position: relative;
+  width: 550px;
+  height: 70px;
+  margin-top: 20px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.category-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 500px;
+  height: 36px;
+  top: 17px;
+  left: calc(50% - 50px);
+  color: #666666;
+  font-family: Public Sans, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 35.25px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 1.5px;
+  z-index: 101;
+}
+
+.category-select {
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  min-width: 0;
+  height: 107px;
+  background: #d7b08e;
+  border: 1px solid #e0e0e0;
+  z-index: 102;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-size: 24px;
+  color: #333;
+}

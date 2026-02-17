@@ -1,0 +1,42 @@
+
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: voting_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: voting_system
+    networks:
+      - voting_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: voting_backend
+    restart: unless-stopped
+    ports:
+      - "8080:8000"
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB: voting_system
+      SECRET_KEY: your-secret-key-change-in-production
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+    networks:
+      - voting_network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  mongodb_data:
+
+networks:
+  voting_network:
+    driver: bridge
