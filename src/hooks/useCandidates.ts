@@ -25,7 +25,7 @@ export const useActivePositions = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://192.168.100.222:8080/api/voter/candidates")
+    fetch("http://localhost:8080/api/voter/candidates")
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -71,7 +71,7 @@ export const useCandidatesByPosition = (positionName: string) => {
   useEffect(() => {
     if (!positionName) return;
     
-    fetch("http://192.168.100.222:8080/api/voter/candidates")
+    fetch("http://localhost:8080/api/voter/candidates")
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();

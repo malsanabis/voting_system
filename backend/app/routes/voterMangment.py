@@ -139,6 +139,34 @@ async def get_voting_results(
         "total_users_isEligible": total_users_isEligible,
     }
 
+# router = APIRouter(prefix="/api/staff", tags=["voter-management"])
+@router.get("/voters/listing")
+async def get_voters_listing(
+    db: Any = Depends(get_database) 
+):
+    try:
+        all_voters = await db.voters.find().to_list(length=None)
+        
+        stats = {
+            "total_all": len(all_voters),
+            "total_eligible": sum(1 for v in all_voters if v.get("isEligible") == True and v.get("hasVoted") == False),
+            "total_voted": sum(1 for v in all_voters if v.get("hasVoted") == True)
+        }
+
+        listing_query = {"isEligible": True, "hasVoted": False}
+        eligible_to_vote_list = await db.voters.find(listing_query).to_list(length=None)
+
+        # تحويل _id إلى string لمنع أخطاء JSON
+        for v in eligible_to_vote_list:
+            v["_id"] = str(v.get("_id"))
+
+        return {
+            "statistics": stats,
+            "voters_list": eligible_to_vote_list
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
 
 @router.get("/voters/check/{voter_id}")
 async def check_voter_exists(
@@ -151,3 +179,5 @@ async def check_voter_exists(
     voter = await db.voters.find_one({"VoterId": target_id})
     
     return {"exists": True if voter else False}
+
+

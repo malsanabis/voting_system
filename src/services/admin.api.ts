@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.100.222:8080/api';
+const API_BASE = 'http://localhost:8080/api';
 
 export interface AdminLoginRequest {
   username: string;

@@ -1,4 +1,6 @@
-const API_BASE = 'http://192.168.100.222:8080/api';
+import { promises } from "node:dns";
+
+const API_BASE = 'http://localhost:8080/api';
 
 export interface VoterMgmLoginRequest {
   username: string;
@@ -188,6 +190,18 @@ checkVoterExists: async (voterId: string): Promise<{ exists: boolean }> => {
     headers: getAuthHeaders(),
   });
   if (!res.ok) throw new Error('Failed to check ID status');
+  return res.json();
+},
+
+
+voterList: async (): Promise<any> => {
+  // المسار: /api + /staff + /voters/listing
+  const res = await fetch(`${API_BASE}/staff/voters/listing`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch");
   return res.json();
 },
 

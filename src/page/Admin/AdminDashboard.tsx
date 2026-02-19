@@ -218,7 +218,7 @@ const handleStartVoting = async () => {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-600">عدد الناخبين المصوتين</p>
-                  <p className="text-2xl font-bold text-gray-800"> {results?.total_votes?.toLocaleString() || 0}</p>
+                  <p className="text-2xl font-bold text-gray-800"> {results?.total_votes?.toLocaleString()}</p>
                 </div>
               </div>
             </div>

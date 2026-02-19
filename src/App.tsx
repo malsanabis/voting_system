@@ -4,6 +4,9 @@ import { ProtectedRoute } from './hooks/useVoterAuth';
 import { AdminProtectedRoutes } from './hooks/useAdminAuth';
 import {VoterMgmProtectedRoutes} from "./hooks/useVoterMgmAuth"
 
+
+import VoterStatusListing from "./page/list/ListPage";
+
 // Voter Pages
 import { EnterTheIdNumber } from "./page/Voter/EnterTheIdNumber";
 import { ChoosePositionBeforeVoting } from "./page/Voter/ChoosePositionBeforeVoting";
@@ -57,7 +60,9 @@ const App = () => {
           {/* ✅ PUBLIC ROUTES */}
           <Route path="/" element={<EnterTheIdNumber />} />
           <Route path="/admin-login" element={<AdminLogin/>} />
-           <Route path="/voterMgmt-login" element={<VoterMangmentLogin/>} />
+          <Route path="/voterMgmt-login" element={<VoterMangmentLogin/>} />
+
+          <Route path="/live-status" element={<VoterStatusListing />} />
 
             {/* ✅ VOTER PROTECTED ROUTES - FIXED */}
             <Route path="/voter" element={<ProtectedRoute />}>
