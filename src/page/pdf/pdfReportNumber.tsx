@@ -9,8 +9,8 @@ export interface CandidateWithVotes {
 }
 
 export interface Results {
-  total_users2: number;
-  total_votes: number;
+  total_users: number;
+  total_votes_all: number;
 }
 
 interface ElectionReportProps {
@@ -20,8 +20,8 @@ interface ElectionReportProps {
 const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
   const dateStr = new Date().toLocaleDateString("ar-BH");
 
-  const validVotes = results?.total_votes ?? 0;
-  const totalUsers = results?.total_users2 ?? 0;
+  const validVotes = results?.total_votes_all ?? 0;
+  const totalUsers = results?.total_users ?? 0;
 
   // Trigger browser print dialog
   const handleDownloadPDF = () => {
@@ -56,12 +56,15 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           </p>
 
           <div className="voteSummary">
-            {totalUsers} ناخب، منها {validVotes} صوت مكتمل، و
+            {totalUsers} ناخب، منها {validVotes} صوت مكتمل
           </div>
 
 
            <div className="footer-signature">
+            <br></br>
             <p>ختم وتوقيع اللجنة المشرفة</p>
+            <br></br>
+             <p>-----------------------------</p>
           </div>
         </div>
         

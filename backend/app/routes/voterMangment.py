@@ -150,6 +150,7 @@ async def get_voters_listing(
         stats = {
             "total_all": len(all_voters),
             "total_eligible": sum(1 for v in all_voters if v.get("isEligible") == True and v.get("hasVoted") == False),
+            "total_eligible_voted": sum(1 for v in all_voters if v.get("isEligible") == True),
             "total_voted": sum(1 for v in all_voters if v.get("hasVoted") == True)
         }
 

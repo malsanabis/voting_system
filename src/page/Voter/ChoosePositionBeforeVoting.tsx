@@ -35,34 +35,53 @@ const PositionCard = ({
 }: { 
   position: PositionCardData; 
   isCompleted: boolean; 
-  selectedCandidate?: {
-    image: string;
-    full_Name: string;
-  };
+  selectedCandidate?: any;
+  // {
+  //   // image: string;
+  //   // full_Name: string;
+  // };
   onClick: () => void;
 }) => {
+
+  // Define the ID used for "None of the above"
+  const NONE_SELECTION_ID = "none_of_the_above"; 
+  const isNoneSelected = selectedCandidate?._id === NONE_SELECTION_ID;
+
   return (
     <button onClick={onClick} className="relative text-left transition-all hover:shadow-lg w-full h-full">
       <Card className={`w-full h-full rounded-2xl border-2 transition-all ${
         isCompleted
-          ? "border-green-400 bg-green-50"
+          ? isNoneSelected ? "border-red-200 bg-red-50" : "border-green-400 bg-green-50"
           : "border-[#e0e0e0] bg-[#fef9ee] hover:border-[#d7b08e]"
       }`}>
         <CardContent className="flex flex-col items-center py-8 px-6">
-          <div className="relative flex items-center justify-center w-20 h-20 mb-4">
+          <div className="relative flex items-center justify-center w-36 h-36 mb-6">
             {isCompleted && selectedCandidate ? (
-              <div className="relative w-full h-full">
+             <div className="relative w-full h-full flex items-center justify-center">
+                {isNoneSelected ? (
+                  /* ✅ Show Red X if "None" was selected */
+                  <div className="w-30 h-30 rounded-full bg-red-500 flex items-center justify-center border-4 border-white shadow-lg">
+                    <span className="text-white text-9xl font-bold leading-none">×</span>
+                  </div>
+                ) : (
                 <img 
                   src={selectedCandidate.image} 
                   alt={selectedCandidate.full_Name}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-green-500 shadow-sm"
+                  className="h-30 rounded-full object-cover border-4 border-green-500 shadow-sm"
                 />
-                <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-1 border-2 border-white">
-                  <Check className="w-3 h-3 text-white" />
+                )}
+              {/* Status Checkmark Badge */}
+                <div className={`absolute -bottom-2 right-2 rounded-full p-2 border-2 border-white shadow-sm ${
+                  isNoneSelected ? "bg-red-600" : "bg-green-500"
+                }`}>
+                  <Check className="w-4 h-4 text-white" />
                 </div>
               </div>
             ) : (
-              position.icon
+              /* Default Icon */
+              <div className="opacity-80 scale-125">
+                {position.icon}
+              </div>
             )}
           </div>
 
@@ -70,17 +89,19 @@ const PositionCard = ({
             {position.nameAr}
           </h3>
 
-          <p className="[font-family:'Public_Sans',Helvetica] font-normal text-[#666666] text-base text-center [direction:rtl]">
+        <p className="[font-family:'Public_Sans',Helvetica] font-normal text-[#666666] text-base text-center [direction:rtl]">
             {isCompleted && selectedCandidate 
-              ? `تم اختيار: ${selectedCandidate.full_Name}` 
+              ? isNoneSelected 
+                ? "تم اختيار: ممتنع / لا أحد" 
+                : `تم اختيار: ${selectedCandidate.full_Name}` 
               : "انقر لعرض المرشحين"}
           </p>
 
-          {isCompleted && (
+          {/* {isCompleted && (
             <span className="text-xs font-semibold text-green-600 mt-3 bg-green-100 px-3 py-1 rounded-full">
-              تم التصويت ✓
+              تم اختيار ✓
             </span>
-          )}
+          )} */}
         </CardContent>
       </Card>
     </button>

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import {generateMatamReport}  from '../../services/pdfReport';
  
 interface VotingResults {
-  total_votes: number;
+  total_votes_all: number;
   total_users: number;
   total_candidates: number;
   // rate: number;
@@ -218,7 +218,7 @@ const handleStartVoting = async () => {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-600">عدد الناخبين المصوتين</p>
-                  <p className="text-2xl font-bold text-gray-800"> {results?.total_votes?.toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-gray-800"> {results?.total_votes_all?.toLocaleString()}</p>
                 </div>
               </div>
             </div>

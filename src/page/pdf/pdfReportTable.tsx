@@ -9,7 +9,7 @@ export interface CandidateWithVotes {
 }
 
 export interface Results {
-  total_users2: number;
+  total_users: number;
   total_votes: number;
   total_votes_all: number;
   candidates_with_votes: CandidateWithVotes[];
@@ -21,7 +21,7 @@ interface ElectionReportProps {
 
 const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
   const dateStr = new Date().toLocaleDateString("ar-BH");
-  const totalUsers = results?.total_users2 ?? 0;
+  const totalUsers = results?.total_users ?? 0;
   const total_votes_all = results?.total_votes_all ?? 0;
   const candidates = results?.candidates_with_votes ?? [];
 
@@ -99,16 +99,28 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
             <p className="paragraph paragraph-small">
               وبعد الشكر لله تعالى، أن وفقنا للقيام بالمهمة التي كلفتمونا بأدائها، والدور المرتقب منا، فإننا نتمنى أن نكون
               عند حسن ظنكم، فقد بذلنا قصاري جهدنا لإدارة العملية الانتخابية بشكل نزيه وشفاف.
-            </p>
-            <p className="paragraph paragraph-small">
-              ونحن اليوم نرفع لكم التقرير النهائي الشامل للعملية الانتخابية، راجين منكم العذر من أي تقصير بدر منا،
+             ونحن اليوم نرفع لكم التقرير النهائي الشامل للعملية الانتخابية، راجين منكم العذر من أي تقصير بدر منا،
               ونسألكم الدعاء.
             </p>
-            <div className="signature-block">
-              <p>وتفضلوا بقبول خالص الشكر والتقدير</p>
-              <p>عن مجلس الأمناء جعفر منصور</p>
-              <p>رئيس اللجنة</p>
+
+           <div className="signature-block">
+            <p>وتفضلوا بقبول خالص الشكر والتقدير</p>
+            
+            {/* حاوية التوقيعات الموزعة */}
+            <div className="signatures-wrapper">
+              <div className="sig-right">
+                <p>رئيس مجلس الانتخابات</p>
+                 <br></br>
+                <p>-----------------------------</p>
+              </div>
+              
+              <div className="sig-left">
+                <p>عن مجلس الأمناء</p>
+                <br></br>
+                <p>-----------------------------</p>
+              </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -149,10 +161,24 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           height: 297mm; /* 🔥 Strict height */
           box-sizing: border-box;
           /* 🔥 Increased bottom padding to 35mm to protect footer */
-          padding: 60mm 20mm 35mm 20mm; 
+          padding: 53mm 20mm 35mm 20mm; 
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+        }
+
+          .signatures-wrapper {
+            display: flex;
+            justify-content: space-between; /* دفع العناصر للأطراف */
+            align-items: flex-start;
+            margin-top: 1px;
+            width: 100%;
+          }
+        .sig-right {
+          text-align: right; /* محاذاة النص لليمين */
+        }
+        .sig-left {
+        text-align: left; /* محاذاة النص لليسار */
         }
 
         /* Styling for compact fit */
@@ -186,7 +212,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           flex-shrink: 0; /* 🔥 Prevents text compression */
           margin-top: 10px;
         }
-        .signature-block { margin-top: 10px; text-align: right; font-size: 13px; line-height: 1.3; }
+        .signature-block { margin-top: 1px; text-align: center; font-size: 13px; line-height: 1.3; }
       `}</style>
     </div>
   );

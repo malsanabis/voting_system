@@ -263,7 +263,7 @@ if (error || !candidates.length) {
         </h2>
         
         <p className="text-lg text-gray-600 mb-8 [direction:rtl]">
-          هل أنت متأكد من أنك لا تريد التصويت لأي مرشح لهذا المنصب؟ سيتم احتساب صوتك كـ "امتناع".
+          هل أنت متأكد من أنك لا تريد التصويت لأي مرشح لهذا المنصب؟".
         </p>
 
         <div className="flex flex-col gap-3">
