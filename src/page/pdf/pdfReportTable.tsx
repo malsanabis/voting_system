@@ -23,7 +23,32 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
   const dateStr = new Date().toLocaleDateString("ar-BH");
   const totalUsers = results?.total_users ?? 0;
   const total_votes_all = results?.total_votes_all ?? 0;
-  const candidates = results?.candidates_with_votes ?? [];
+  // const candidates = results?.candidates_with_votes ?? [];
+
+  // 1. Define the custom order
+  const positionOrder = [
+    "رئيس مجلس الإدارة",
+    "نائب رئيس مجلس الإدارة",
+    "الأمين المالي",
+    "أمين السر",
+    "مدير المأتم",
+    "منسق اللجان الفاعلة",
+    "منسق اللجان الداعمة",
+  ];
+
+  // 2. Filter and Sort the list
+  const candidates = [...(results?.candidates_with_votes ?? [])].sort((a, b) => {
+    const indexA = positionOrder.indexOf(a.position_name);
+    const indexB = positionOrder.indexOf(b.position_name);
+
+    // First: Sort by position hierarchy
+    if (indexA !== indexB) {
+      return indexA - indexB;
+    }
+
+    // Second: Sort by votes (Highest to Lowest) within the same position
+    return b.votes - a.votes;
+  });
 
   // Trigger browser print dialog
   const handleDownloadPDF = () => {
@@ -161,7 +186,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           height: 297mm; /* 🔥 Strict height */
           box-sizing: border-box;
           /* 🔥 Increased bottom padding to 35mm to protect footer */
-          padding: 53mm 20mm 35mm 20mm; 
+          padding: 54mm 20mm 35mm 20mm; 
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -188,7 +213,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
         
         .main-body { flex-grow: 1; } /* Allows table to expand */
         
-        .greeting { font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+        .greeting { font-weight: bold; font-size: 14px; margin-bottom: 5px; margin-top: -9px; }
         .paragraph { margin-top: 0; margin-bottom: 5px; line-height: 1.5; font-size: 14px; text-align: justify; }
         .paragraph-small { font-size: 13px; line-height: 1.3; }
 
