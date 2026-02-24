@@ -69,7 +69,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           {/* Header Section */}
           <div className="header-section">
             <h1 className="title">
-              النتائج النهائية بحسب التسلسل الهرمي لانتخابات مجلس الإدارة
+              النتائج النهائية لنتخابات مجلس الإدارة
             </h1>
             <h2 className="subtitle">مأتم السنابس لعام 1447-1450هـ</h2>
             <div className="topRight">{dateStr}</div>
@@ -80,9 +80,8 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
             <div className="greeting">السلام عليكم ورحمة الله وبركاته</div>
 
             <p className="paragraph">
-              يطيب لنا أن نتقدم لكم بالشكر الجزيل على ثقتكم الكبيرة بتخويلنا
-              للإعداد والإشراف على انتخاب مجلس إدارة جديد للمأتم للفترة الإدارية،
-              حيث بلغ عدد الناخبين المسجلين لهذه العملية الإنتخابية:
+            إلى: رئيس مجلس الأمناء المحترم<br></br>
+​بدايةً، نتقدم بالشكر لمجلسكم الموقر على الثقة، وللأخوة المترشحين والناخبين على مساهمتهم في إتمام هذه العملية بسلاسة. ونعرض لكم ملخص العملية الانتخابية:
             </p>
 
             <div className="voteSummary">

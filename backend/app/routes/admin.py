@@ -317,7 +317,8 @@ async def start_voting(
     # 2. إعادة تعيين حالة جميع الناخبين ليتمكنوا من التصويت مجدداً
     await db.voters.update_many(
         {}, 
-        {"$set": {"hasVoted": False}}
+        {"$set": {"hasVoted": False,
+            "isEligible": False}}
     )
     
     # 3. تحديث حالة النظام: مقفل للتعديل ومفتوح للتصويت

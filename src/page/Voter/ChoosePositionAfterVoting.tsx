@@ -121,7 +121,7 @@ if (error || !candidates.length) {
   return (
     <div className="relative w-full min-h-screen bg-white overflow-hidden">
       <img className="absolute inset-0 w-full h-full object-cover" alt="Background" src="/Gemini_image.png" />
-      
+          {/* <img className="w-16 h-16 mx-auto mb-8" alt="Logo" src="/logo.png" /> */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen py-12 px-4">
         <div className="w-full max-w-5xl">
           <button

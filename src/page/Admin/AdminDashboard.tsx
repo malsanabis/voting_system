@@ -9,6 +9,7 @@ interface VotingResults {
   total_votes_all: number;
   total_users: number;
   total_candidates: number;
+  total_users2: number;
   // rate: number;
   // categories: Record<string, any>;
 }
@@ -164,14 +165,14 @@ const handleStartVoting = async () => {
             <Users className="w-5 h-5" />
             <span>المرشحون</span>
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
+          {/* <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
             <UserCheck className="w-5 h-5" />
             <span>الناخبون</span>
           </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
             <BarChart3 className="w-5 h-5" />
             <span>الإحصائيات</span>
-          </button>
+          </button> */}
           <button onClick={() => onNavigate('/admin/staff')}
           className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
             <Settings className="w-5 h-5" />
@@ -191,22 +192,48 @@ const handleStartVoting = async () => {
       <main className="flex-1 p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <Bell className="w-6 h-6 text-gray-600" />
               <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-            </div>
+            </div> */}
             <h1 className="text-3xl font-bold text-gray-800">لوحة التحكم</h1>
           </div>
 
           <div className="grid grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-xl p-10 shadow-sm">
+            <div className="bg-white rounded-xl p-6 shadow-sm">
               <div className="flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${votingActive ? 'bg-green-100' : 'bg-red-100'}`}>
-                  <CheckCircle className={`w-10 h-10 ${votingActive ? 'text-green-600' : 'text-red-600'}`} />
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <Users className="w-6 h-6 text-green-600" />
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">حالة الانتخابات</p>
-                  <p className="text-2xl font-bold text-gray-800">{votingActive ? 'نشطة' : 'متوقفة'}</p>
+                <p className="text-sm text-gray-600">عدد أخر جمعية عمومية</p>
+                  <p className="text-2xl font-bold text-gray-800"> {results?.total_users2?.toLocaleString() || 0}</p>
+                </div>
+              </div>
+            </div>
+
+
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                  <Users className="w-6 h-6 text-purple-600" />
+                </div>
+                <div className="text-right">
+                <p className="text-sm text-gray-600">عدد المرشحين</p>
+                  <p className="text-2xl font-bold text-gray-800"> {results?.total_candidates?.toLocaleString() || 0}</p>
+                </div>
+              </div>
+            </div>
+
+
+             <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                  <UserCheck className="w-6 h-6 text-amber-600" />
+                </div>
+                <div className="text-right">
+                   <p className="text-sm text-gray-600"> إجمالي الناخبين المسجلين</p>
+                  <p className="text-2xl font-bold text-gray-800">{results?.total_users?.toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -222,35 +249,20 @@ const handleStartVoting = async () => {
                 </div>
               </div>
             </div>
+           </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
-                  <UserCheck className="w-6 h-6 text-amber-600" />
-                </div>
-                <div className="text-right">
-                   <p className="text-sm text-gray-600"> إجمالي الناخبين المسجلين</p>
-                  <p className="text-2xl font-bold text-gray-800">{results?.total_users?.toLocaleString()}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <Users className="w-6 h-6 text-purple-600" />
-                </div>
-                <div className="text-right">
-                <p className="text-sm text-gray-600">عدد المرشحين</p>
-                  <p className="text-2xl font-bold text-gray-800"> {results?.total_candidates?.toLocaleString() || 0}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-8 mb-8 shadow-sm">
+          <div className="bg-white rounded-xl p-8 mb-8 shadow-sm relative">
             <h2 className="text-xl font-bold text-gray-800 mb-8 text-right">إجراءات التحكم بالانتخابات</h2>
             <p className="text-gray-600 text-right mb-6">إدارة وجدولة فتح وإنهاء العملية الانتخابية</p>
+             <div className="absolute top-4 left-12 flex items-center gap-4">
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${votingActive ? 'bg-green-100' : 'bg-red-100'}`}>
+                  <CheckCircle className={`w-10 h-10 ${votingActive ? 'text-green-600' : 'text-red-600'}`} />
+                </div>
+                <div className="text-right">
+                  <p className="text-sm text-gray-600">حالة الانتخابات</p>
+                  <p className="text-2xl font-bold text-gray-800">{votingActive ? 'نشطة' : 'متوقفة'}</p>
+                </div>
+              </div>
 
             <div className="space-y-4">
               <button

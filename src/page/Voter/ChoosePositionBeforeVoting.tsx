@@ -55,7 +55,7 @@ const PositionCard = ({
           : "border-[#e0e0e0] bg-[#fef9ee] hover:border-[#d7b08e]"
       }`}>
         <CardContent className="flex flex-col items-center py-8 px-6">
-          <div className="relative flex items-center justify-center w-36 h-36 mb-6">
+          <div className="relative flex items-center justify-center w-40 h-40 mb-6">
             {isCompleted && selectedCandidate ? (
              <div className="relative w-full h-full flex items-center justify-center">
                 {isNoneSelected ? (
@@ -110,6 +110,7 @@ const PositionCard = ({
 
 export const ChoosePositionBeforeVoting = (): JSX.Element => {
   const navigate = useNavigate();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   // const [isSubmitting, setIsSubmitting] = useState(false);
  const { votes, completedPositions, setVotes, setCompletedPositions } = React.useContext(VotingContext);
 
@@ -124,33 +125,37 @@ export const ChoosePositionBeforeVoting = (): JSX.Element => {
 
   const handleSubmitAllVotes = async () => {
   if (isAllCompleted && voterId) {
+    setIsConfirmModalOpen(true); // Just open the modal
+  }
+  }
 
+// Step 2: Triggered by the Modal "Yes" button
+  const finalizeSubmission = async () => {
     const voteData = {
       VoterId: voterId,
       choices: Object.entries(votes).map(([positionName, candidate]: [string, any]) => ({
         positionName,
         candidateId: candidate._id  // Backend expects candidate._id
-      }))
+     }))
     };
 
     try {
+      setIsConfirmModalOpen(false);
       await votesAPI.submit(voteData);  // SINGLE backend call with ALL votes
       setVotes({});  // Reset context
       setCompletedPositions(new Set());
       navigate("/voter/success");
     }catch (error: any) {
     // ✅ FIXED: Proper error display
+    setIsConfirmModalOpen(false);
     const errorMsg = error instanceof Error 
       ? error.message 
       : JSON.stringify(error, null, 2);
     
     console.error('❌ Submit failed:', error);
     alert('خطأ في إرسال الأصوات: ' + errorMsg);
-  }
-  }
-};
-
-
+  }}
+  
   if (loading) {
     return <div className="flex items-center justify-center min-h-screen">جاري التحميل...</div>;
   }
@@ -170,7 +175,7 @@ export const ChoosePositionBeforeVoting = (): JSX.Element => {
       
       <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen py-12 px-4">
         <div className="w-full max-w-6xl">
-          <img className="w-16 h-16 mx-auto mb-8" alt="Logo" src="/aabc6cd6-eb56-450f-81eb-416495f3aea8-1.png" />
+          {/* <img className="w-16 h-16 mx-auto mb-8" alt="Logo" src="/logo.png" /> */}
           
           <h1 className="[font-family:'Public_Sans',Helvetica] font-bold text-[#1a1a1a] text-5xl text-center [direction:rtl] mb-3">
             اختر المنصب
@@ -212,9 +217,53 @@ export const ChoosePositionBeforeVoting = (): JSX.Element => {
             </Button>
           </div>
 
-          <footer className="mt-12 [font-family:'Cairo',Helvetica] font-normal text-slate-500 text-sm text-center [direction:rtl]">
+         {/* --- CONFIRMATION MODAL --- */}
+      {isConfirmModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+            onClick={() => setIsConfirmModalOpen(false)} 
+          />
+          
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 animate-in fade-in zoom-in duration-300">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">⚠️</span>
+              </div>
+              
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 [direction:rtl]">
+                تنبيه: سيتم تسليم التصويت.
+              </h2>
+              
+              <p className="text-lg text-gray-600 mb-8 [direction:rtl]">
+                هل أنت متأكد من أنك تريد تسليم التصويت للمرشحين؟
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={finalizeSubmission}
+                  className="w-full py-4 bg-[#d7b08e] hover:bg-[#c9a07e] text-white rounded-xl font-bold text-lg transition-colors"
+                >
+                  نعم، أريد تسليم التصويت
+                </button>
+                
+                <button
+                  onClick={() => setIsConfirmModalOpen(false)}
+                  className="w-full py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-bold text-lg transition-colors"
+                >
+                  إلغاء والرجوع للقائمة
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+          {/* <footer className="mt-12 [font-family:'Cairo',Helvetica] font-normal text-slate-500 text-sm text-center [direction:rtl]">
             نظام التصويت الإلكتروني. جميع الحقوق محفوظة.
-          </footer>
+          </footer> */}
         </div>
       </div>
     </div>

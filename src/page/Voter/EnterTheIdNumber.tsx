@@ -4,12 +4,29 @@ import { Button } from "../../components/button";
 import { Card, CardContent } from "../../components/card";
 import { Input } from "../../components/input";
 import { authApi } from "../../services/voter.api"
+import { Delete } from "lucide-react";
 
 export const EnterTheIdNumber = (): JSX.Element => {
   const [idNumber, setIdNumber] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  // --- Keypad Logic ---
+  const handleNumberClick = (num: string) => {
+    if (idNumber.length < 9) {
+      setIdNumber((prev) => prev + num);
+      if (error) setError("");
+    }
+  };
+
+  const handleDelete = () => {
+    setIdNumber((prev) => prev.slice(0, -1));
+  };
+
+  const handleClear = () => {
+    setIdNumber("");
+  };
 
   const handleSubmit = async () => {
     if (!idNumber.trim()) {
@@ -85,6 +102,34 @@ export const EnterTheIdNumber = (): JSX.Element => {
                 className="w-full h-[70px] bg-neutral-100 rounded-xl border border-solid border-[#e0e0e0] [font-family:'Public_Sans',Helvetica] font-medium text-[#666666] text-3xl tracking-[1.50px] text-center [direction:rtl] mb-[42px]"
               />
 
+              {/* Virtual Keypad */}
+              <div className="grid grid-cols-4 gap-2 w-full mb-5" dir="ltr">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9,0].map((num) => (
+                  <button
+                    key={num}
+                    type="button"
+                    onClick={() => handleNumberClick(num.toString())}
+                    className="h-16 bg-white border border-gray-200 rounded-xl text-2xl font-bold text-gray-700 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
+                  >
+                    {num}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleClear}
+                  className="h-16 bg-red-50 text-red-600 rounded-xl font-bold text-lg hover:bg-red-100 transition-colors"
+                >
+                  مسح الكل
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="h-16 bg-gray-100 text-gray-600 rounded-xl flex items-center justify-center hover:bg-gray-200 transition-colors"
+                >
+                  <Delete size={28} />
+                </button>
+              </div>
+
               {error && (
                 <p className="text-red-500 text-xl font-medium text-center [direction:rtl] mb-6">
                   {error}
@@ -101,9 +146,9 @@ export const EnterTheIdNumber = (): JSX.Element => {
             </CardContent>
           </Card>
 
-          <footer className="mt-12 [font-family:'Cairo',Helvetica] font-normal text-slate-500 text-sm tracking-[0] leading-5 text-center whitespace-nowrap [direction:rtl]">
+          {/* <footer className="mt-12 [font-family:'Cairo',Helvetica] font-normal text-slate-500 text-sm tracking-[0] leading-5 text-center whitespace-nowrap [direction:rtl]">
             نظام التصويت الإلكتروني. جميع الحقوق محفوظة.
-          </footer>
+          </footer> */}
         </div>
       </div>
     </div>
