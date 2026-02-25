@@ -136,6 +136,27 @@ const handleStartVoting = async () => {
     setLoading(false);
   }
 };
+
+const handleGoToVoterReport2 = async () => {
+  try {
+    setLoading(true);
+
+    // ✅ استخدم adminApi بدلاً من fetch لضمان إرسال الـ Token والـ Base URL
+    const data = await adminApi.getVoterListReport();
+
+    onNavigate("/admin/print/election-report2", { 
+   state: { results},
+    });
+  } catch (err: any) {
+    console.error("PDF Error:", err);
+    // إذا كان الخطأ 401، فالمشكلة في الصلاحيات
+    alert("خطأ أثناء جلب قائمة الناخبين، تأكد من تسجيل الدخول");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   // متغيرات مساعدة للواجهة
   const isVotingOpen = settings?.is_open === true;
 
@@ -165,10 +186,11 @@ const handleStartVoting = async () => {
             <Users className="w-5 h-5" />
             <span>المرشحون</span>
           </button>
-          {/* <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
+          { <button onClick={() => onNavigate('/admin/candidates')} className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
             <UserCheck className="w-5 h-5" />
             <span>الناخبون</span>
           </button>
+          /*
           <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-white/50 rounded-lg transition-colors">
             <BarChart3 className="w-5 h-5" />
             <span>الإحصائيات</span>
@@ -320,10 +342,14 @@ const handleStartVoting = async () => {
                تحميل النتائج PDF
               </button>
                <button onClick={handleGoToVoterReport} className="bg-green-600 gap-12 mx-4">
-               تحميل قاعدة البيانات للمشاركين PDF
+               تحميل البيانات للتصفير PDF
+              </button>
+              <button onClick={handleGoToVoterReport2} className="bg-green-600 gap-12 mx-4">
+               تحميل البيانات الفتره الاولة PDF
               </button>
             </div>
           </div>
+
 
           <div className="bg-white rounded-xl p-8 shadow-sm">
             <div className="flex items-center justify-between">

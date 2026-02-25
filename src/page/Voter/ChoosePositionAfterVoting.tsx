@@ -121,6 +121,17 @@ if (error || !candidates.length) {
   return (
     <div className="relative w-full min-h-screen bg-white overflow-hidden">
       <img className="absolute inset-0 w-full h-full object-cover" alt="Background" src="/Gemini_image.png" />
+      <img
+            className="absolute top-4 right-4 w-[220px] h-[220px] object-cover mb-3"
+            alt="logo"
+              src="/logo.png"
+          />
+
+          <img
+            className="absolute top-4 left-9 w-[190px] h-[190px] object-cover mb-3"
+            alt="logo"
+              src="/slocan.png"
+          />
           {/* <img className="w-16 h-16 mx-auto mb-8" alt="Logo" src="/logo.png" /> */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen py-12 px-4">
         <div className="w-full max-w-5xl">
@@ -160,7 +171,7 @@ if (error || !candidates.length) {
             <CardContent className="flex flex-col items-center py-16 px-13">
               
               {/* Increased Image Size from w-24 to w-56 */}
-              <div className={`relative w-56 h-56 mb-8 rounded-full p-1.5 transition-all shadow-md ${
+              <div className={`w-54 h-58 mb-8 rounded-full p-1.5 transition-all shadow-md ${
                 isSelected ? "bg-[#d7b08e]" : "bg-gray-100 group-hover:bg-[#f0e6da]"
               }`}>
                 <img 
@@ -194,7 +205,7 @@ if (error || !candidates.length) {
         ? "border-red-400 bg-red-50 ring-8 ring-red-400/10 scale-[1.03]"
         : "border-dashed border-gray-300 bg-gray-50 hover:border-red-300 hover:bg-white"
 }`}>
-    <CardContent className="flex flex-col items-center py-9 px-10">
+    <CardContent className="flex flex-col items-center py-12 px-10">
         {/* Increased Size to w-56 */}
         <div className={`relative w-56 h-56 mb-8 rounded-full flex items-center justify-center border-4 transition-all ${
             selectedCandidate === NONE_SELECTION_ID 
@@ -242,9 +253,9 @@ if (error || !candidates.length) {
             </Button>
           </div>
 
-          <footer className="mt-16 [font-family:'Cairo',Helvetica] font-normal text-slate-400 text-sm text-center [direction:rtl]">
+          {/* <footer className="mt-16 [font-family:'Cairo',Helvetica] font-normal text-slate-400 text-sm text-center [direction:rtl]">
             نظام التصويت الإلكتروني. جميع الحقوق محفوظة.
-          </footer>
+          </footer> */}
           
           {isNoneModalOpen && (
   <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">

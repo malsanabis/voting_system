@@ -20,8 +20,9 @@ import { CurrentCandidates } from "./page/Admin/CurrentCandidates";
 import { CreateCandidate } from "./page/Admin/CreateCandidate";
 import CreateVoterMgmt from "./page/Admin/CreateVoterMgmt"
 import {ElectionReportWrapper} from "./page/pdf/pdfwrapper"
-import {ElectionReportNUmWrapper} from "./page/pdf/pdfwrapperNum"
+import {ElectionReportNUmWrapper} from "./page/pdf/pdfwrapperNum";
 import {VoterListReportWrapper} from "./page/pdf/VoterReportWrapper";
+import { ElectionReportwrapperAfter } from "./page/pdf/ElectionReportwrapperAfter";
 
 // Voter Mgmt Pages
 import { VoterMangmentLogin } from "./page/VoterManager/VoterMangmentLogin";
@@ -82,6 +83,7 @@ const App = () => {
             <Route path="/admin/staff" element={<CreateVoterMgmt />} />
             <Route path="print/election-report" element={<ElectionReportWrapper />} />
             <Route path="print/election-total-report" element={<ElectionReportNUmWrapper />} />
+            <Route path="print/election-report2" element={<ElectionReportwrapperAfter />} />
             <Route path="print/voter-report" element={<VoterListReportWrapper />} />
           </Route>
 

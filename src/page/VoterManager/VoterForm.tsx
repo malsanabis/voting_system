@@ -109,7 +109,9 @@ const validateAndCalculateCPR = (cpr: string) => {
       age--;
     }
 
-    return { age: Math.floor(age), error: '' };
+    const diffMs = today.getTime() - birthDate.getTime();
+const ageInYears = diffMs / (1000 * 60 * 60 * 24 * 365.25);
+return { age: parseFloat(ageInYears.toFixed(2)), error: '' };
   } catch (error) {
     return { age: null, error: 'خطأ في معالجة رقم الهوية' };
   }
@@ -289,7 +291,7 @@ try {
     placeholder="YYMMNNNNC (مثال: 950312345)"
     className={`w-full px-6 py-4 rounded-lg text-right text-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
       formData.voter_id.length === 9 
-        ? calculatedAge !== null && calculatedAge >= 17.5 
+        ? calculatedAge !== null && calculatedAge >= 17.5
           ? 'bg-green-50 border-2 border-green-400 ring-green-400 ring-offset-2' 
           : 'bg-red-50 border-2 border-red-400 ring-red-400 ring-offset-2'
         : 'bg-[#c9a677] bg-opacity-40 focus:ring-[#c9a677]'

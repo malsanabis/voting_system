@@ -17,7 +17,7 @@ interface ElectionReportProps {
   results: Results;
 }
 
-const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
+const ElectionReport2: React.FC<ElectionReportProps> = ({ results }) => {
   const dateStr = new Date().toLocaleDateString("ar-BH");
 
   const validVotes = results?.total_votes_all ?? 0;
@@ -35,25 +35,22 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
         📥 تحميل التقرير (PDF)
       </button>
 
-      <div className="page-container">
+        <div className="page-container">
         <img src="/A4.png" className="background-img" alt="Background" />
 
         <div className="content">
           <h1 className="title">
-            عدد الأصوات مسجله
+            تقرير حول نهاية الفترة الانتخابية الأولى
+            <br></br>من ٣:١٥م إلى ٥:١٥م
           </h1>
 
-          <h2 className="subtitle">مأتم السنابس لعام 1447-1450هـ</h2>
+          <h2 className="subtitle">مأتم السنابس للدورة 1447-1450هـ</h2>
 
           <div className="topRight">{dateStr}</div>
 
           <div className="greeting">السلام عليكم ورحمة الله وبركاته</div>
 
-          <p className="paragraph">
-            يطيب لنا أن نتقدم لكم بالشكر الجزيل على ثقتكم الكبيرة بتخويلنا
-            للإعداد والإشراف على انتخاب مجلس إدارة جديد للمأتم للفترة الإدارية،
-            حيث بلغ عدد الناخبين المسجلين لهذه العملية الإنتخابية:
-          </p>
+          <p className="paragraph">تفيد لجنة الانتخابات، أنه في نهاية الفترة الأولى، تم غلق عملية التصويت، حيث بلغ عدد المقترعين.</p>
 
           <div className="voteSummary">
             {totalUsers} ناخب، منها {validVotes} صوت مكتمل
@@ -177,4 +174,4 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
   );
 };
 
-export default ElectionReport;
+export default ElectionReport2;

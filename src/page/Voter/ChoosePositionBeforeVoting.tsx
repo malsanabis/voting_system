@@ -55,12 +55,12 @@ const PositionCard = ({
           : "border-[#e0e0e0] bg-[#fef9ee] hover:border-[#d7b08e]"
       }`}>
         <CardContent className="flex flex-col items-center py-8 px-6">
-          <div className="relative flex items-center justify-center w-40 h-40 mb-6">
+          <div className="relative flex items-center justify-center w-40 h-40 mb-8">
             {isCompleted && selectedCandidate ? (
              <div className="relative w-full h-full flex items-center justify-center">
                 {isNoneSelected ? (
                   /* ✅ Show Red X if "None" was selected */
-                  <div className="w-30 h-30 rounded-full bg-red-500 flex items-center justify-center border-4 border-white shadow-lg">
+                  <div className="w-31 h-38 rounded-full bg-red-500 flex items-center justify-center border-4 border-white shadow-lg">
                     <span className="text-white text-9xl font-bold leading-none">×</span>
                   </div>
                 ) : (
@@ -172,6 +172,17 @@ export const ChoosePositionBeforeVoting = (): JSX.Element => {
   return (
     <div className="relative w-full min-h-screen bg-white overflow-hidden">
       <img className="absolute inset-0 w-full h-full object-cover" alt="Background" src="/Gemini_image.png" />
+      <img
+            className="absolute top-4 right-4 w-[220px] h-[220px] object-cover mb-3"
+            alt="logo"
+              src="/logo.png"
+          />
+
+          <img
+            className="absolute top-4 left-9 w-[190px] h-[190px] object-cover mb-3"
+            alt="logo"
+              src="/slocan.png"
+          />
       
       <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen py-12 px-4">
         <div className="w-full max-w-6xl">
@@ -182,7 +193,7 @@ export const ChoosePositionBeforeVoting = (): JSX.Element => {
           </h1>
           
           <p className="[font-family:'Public_Sans',Helvetica] font-normal text-[#666666] text-2xl text-center [direction:rtl] mb-12">
-            اختر منصب من الوزارة التنظيمية آدابا لتعرض المرشحين والتصويت.
+            افتح نافذة المنصب الإداري ثم صوت.
           </p>
 
           {/* ✅ عرض المناصب النشطة فقط */}

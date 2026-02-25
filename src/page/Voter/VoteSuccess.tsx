@@ -37,6 +37,18 @@ export const VoteSuccess = (): JSX.Element => {
         src="/Gemini_image.png"
       />
 
+      <img
+            className="absolute top-4 right-4 w-[220px] h-[220px] object-cover mb-3"
+            alt="logo"
+              src="/logo.png"
+          />
+
+          <img
+            className="absolute top-4 left-9 w-[190px] h-[190px] object-cover mb-3"
+            alt="logo"
+              src="/slocan.png"
+          />
+
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-[600px] px-4">
         <div className="flex flex-col items-center w-full">
           <Card className="w-full bg-[#fef9ee] rounded-2xl border border-solid border-[#e0e0e0] shadow-[0px_4px_6px_-4px_#0000001a,0px_10px_15px_-3px_#0000001a]">

@@ -106,7 +106,7 @@ const fetchData = async () => {
 
               {/* 3. انتظار التصويت (نسبة من الحاليين) */}
               <StatCard 
-                label="عدد الناخبين إنتظار التصويت" 
+                label="عدد الناخبين في انتظار التصويت" 
                 value={stats?.total_eligible} 
                 percent={calculatePercent(stats?.total_eligible, currentTotal)}
                 color="green" 
@@ -114,7 +114,7 @@ const fetchData = async () => {
 
               {/* 4. الذين أتموا التصويت (نسبة من الحاليين) */}
               <StatCard 
-                label="عدد الناخبين الذين اتموا التصويت" 
+                label="عدد الناخبين الذين أتموا التصويت" 
                 value={stats?.total_voted} 
                 percent={calculatePercent(stats?.total_voted, currentTotal)}
                 color="blue" 

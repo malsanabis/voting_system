@@ -66,13 +66,21 @@ export const EnterTheIdNumber = (): JSX.Element => {
         src="/Gemini_image.png"
       />
 
+       <img
+            className="absolute top-4 right-4 w-[220px] h-[220px] object-cover mb-3"
+            alt="logo"
+              src="/logo.png"
+          />
+
+          <img
+            className="absolute top-4 left-9 w-[190px] h-[190px] object-cover mb-3"
+            alt="logo"
+              src="/slocan.png"
+          />
+
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-[600px] px-4">
         <div className="flex flex-col items-center w-full">
-          <img
-            className="w-[406px] h-[310px] object-cover mb-[-120px]"
-            alt="Aabccd eb f"
-              src="/Gemini_image.png"
-          />
+         
 
           <h1 className="[font-family:'Public_Sans',Helvetica] font-bold text-[#1a1a1a] text-5xl text-center tracking-[-1.20px] leading-[53px] [direction:rtl] mb-8">
             نظام التصويت الالكتروني
@@ -97,9 +105,9 @@ export const EnterTheIdNumber = (): JSX.Element => {
                   setIdNumber(e.target.value);
                   if (error) setError("");
                 }}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder="ادخل رقم الهوية المكون من 9 ارقام"
-                className="w-full h-[70px] bg-neutral-100 rounded-xl border border-solid border-[#e0e0e0] [font-family:'Public_Sans',Helvetica] font-medium text-[#666666] text-3xl tracking-[1.50px] text-center [direction:rtl] mb-[42px]"
+                className="w-full h-[70px] bg-neutral-100 rounded-xl border border-solid border-[#e0e0e0] [font-family:'Public_Sans',Helvetica] font-xlarge text-[#666666] text-3xl tracking-[1.50px] text-center [direction:rtl] mb-[42px]"
               />
 
               {/* Virtual Keypad */}
@@ -109,7 +117,7 @@ export const EnterTheIdNumber = (): JSX.Element => {
                     key={num}
                     type="button"
                     onClick={() => handleNumberClick(num.toString())}
-                    className="h-16 bg-white border border-gray-200 rounded-xl text-2xl font-bold text-gray-700 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
+                    className="h-16 bg-white border border-gray-200 rounded-xl text-4xl font-bold text-gray-700 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
                   >
                     {num}
                   </button>

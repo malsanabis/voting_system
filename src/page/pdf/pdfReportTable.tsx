@@ -69,9 +69,9 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           {/* Header Section */}
           <div className="header-section">
             <h1 className="title">
-              النتائج النهائية لنتخابات مجلس الإدارة
+              النتائج النهائية لانتخابات مجلس الإدارة
             </h1>
-            <h2 className="subtitle">مأتم السنابس لعام 1447-1450هـ</h2>
+            <h2 className="subtitle">مأتم السنابس للدورة 1447-1450هـ</h2>
             <div className="topRight">{dateStr}</div>
           </div>
 
@@ -122,7 +122,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
           <div className="closing-section">
             <p className="paragraph paragraph-small">
               وبعد الشكر لله تعالى، أن وفقنا للقيام بالمهمة التي كلفتمونا بأدائها، والدور المرتقب منا، فإننا نتمنى أن نكون
-              عند حسن ظنكم، فقد بذلنا قصاري جهدنا لإدارة العملية الانتخابية بشكل نزيه وشفاف.
+              عند حسن ظنكم، فقد بذلنا قصارى جهدنا لإدارة العملية الانتخابية بشكل نزيه وشفاف.
              ونحن اليوم نرفع لكم التقرير النهائي الشامل للعملية الانتخابية، راجين منكم العذر من أي تقصير بدر منا،
               ونسألكم الدعاء.
             </p>
@@ -133,7 +133,7 @@ const ElectionReport: React.FC<ElectionReportProps> = ({ results }) => {
             {/* حاوية التوقيعات الموزعة */}
             <div className="signatures-wrapper">
               <div className="sig-right">
-                <p>رئيس مجلس الانتخابات</p>
+                <p>رئيس لجنة الانتخابات</p>
                  <br></br>
                 <p>-----------------------------</p>
               </div>
