@@ -305,15 +305,22 @@ export default function VoterList() {
                     {/* 5️⃣ حالة التصويت */}
                     <td className="py-4 px-6">
                       <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                        voter.is_eligible 
+                      voter.has_voted 
+                        ? 'bg-blue-100 text-blue-800 border border-blue-200' // لون أزرق للمصوتين
+                        : voter.is_eligible 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-red-100 text-red-800'
-                      }`}>
-                        {voter.is_eligible ? 'يحق له التصويت' : 'لا يحق له التصويت'}
-                      </span>
+                    }`}>
+                      {voter.has_voted 
+                        ? '✅ تم التصويت'
+                        : voter.is_eligible 
+                          ? 'يحق له التصويت' 
+                          : 'لم يتم ادخال بياناته'}
+                    </span>
                     </td>
                     {/* 6️⃣ الإجراءات - LAST */}
-                    <td className="py-4 px-6">
+                   <td className="py-4 px-6 text-center">
+                    {!voter.has_voted ? (
                       <button
                         onClick={() => handleEdit(voter.voter_id)}
                         className="text-[#c9a677] hover:text-[#b8956a] hover:bg-gray-100 p-2 rounded-lg transition-all duration-200"
@@ -321,6 +328,9 @@ export default function VoterList() {
                       >
                         <Edit className="w-5 h-5" />
                       </button>
+                    ) : (
+                      <span className="text-gray-400 text-sm italic">لا يمكن التعديل</span>
+                    )}
                     </td>
                   </tr>
                 ))

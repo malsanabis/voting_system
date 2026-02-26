@@ -14,7 +14,7 @@ export default function VoterForm() {
     full_name: '',
     mobile: '',
     address: '',
-    membership_type:'عضوية ناقصة' as 'عضوية ناقصة' | 'عضوية كاملة',
+   membership_type: 'عضوية كاملة' as 'عضوية ناقصة' | 'عضوية كاملة',
   });
   const [loading, setLoading] = useState(false);
   const [showAgeWarning, setShowAgeWarning] = useState(false);
@@ -36,7 +36,7 @@ export default function VoterForm() {
         full_name: '',
         mobile: '',
         address: '',
-        membership_type:'عضوية ناقصة' as 'عضوية ناقصة' | 'عضوية كاملة',
+       membership_type: 'عضوية كاملة' as 'عضوية ناقصة' | 'عضوية كاملة',
       });
       setCalculatedAge(null);
       setCprError('');
@@ -196,6 +196,7 @@ try {
         age: calculatedAge || 0,
         membership_type: formData.membership_type,
       });
+      
       alert('✅ تم إضافة الناخب الجديد بنجاح');
     }
     navigate('/voterMgmt/voters');

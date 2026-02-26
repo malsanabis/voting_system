@@ -46,6 +46,7 @@ class VoterResponse(VoterBase):
     is_eligible: bool = Field(False, alias="isEligible")
     has_voted: bool = Field(False, alias="hasVoted")
     created_at:datetime = Field(None, alias="created_at")
+    eligible_at: Optional[datetime] = Field(None, alias="eligibleAt")
 
 
 

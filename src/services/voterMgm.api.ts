@@ -87,6 +87,7 @@ getVoters: async (): Promise<Voter[]> => {
     membership_type: v.MembershipType || v.membership_type || 'عضوية ناقصة',
     age: v.age || v.Age || 0,
     is_eligible: v.isEligible ?? v.is_eligible ?? false, // استخدام ?? للتعامل مع القيم البوليانية
+    has_voted: v.hasVoted ?? false, // تأكد من وجود هذا السطر
   }));
 },
 
@@ -136,7 +137,7 @@ createVoter: async (data: VoterCreateRequest): Promise<Voter> => {
       phone: data.mobile,
       address: data.address,
       MembershipType: data.membership_type,
-      age: data.age,
+     age: Math.floor(data.age),
     }),
   });
 

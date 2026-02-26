@@ -318,7 +318,8 @@ async def start_voting(
     await db.voters.update_many(
         {}, 
         {"$set": {"hasVoted": False,
-            "isEligible": False}}
+            "isEligible": False,
+            "eligibleAt": None}}
     )
     
     # 3. تحديث حالة النظام: مقفل للتعديل ومفتوح للتصويت

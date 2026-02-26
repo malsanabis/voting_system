@@ -87,9 +87,9 @@ async def import_election_data():
     # 3. Voters (Skip if no file)
     print("\n📥 استيراد الناخبين...")
     imported = 0
-    if os.path.exists('Total Voters participated Query.xlsx'):
+    if os.path.exists('Total Voters participated Query2.xlsx'):
         try:
-            df = pd.read_excel('Total Voters participated Query.xlsx')
+            df = pd.read_excel('Total Voters participated Query2.xlsx')
             for _, row in df.iterrows():
                 try:
                     voter_name = str(row['أسم الناخب'])[:100]

@@ -16,14 +16,23 @@ const fetchData = async () => {
     try {
       const response = await voterMgmApi.voterList(); 
       
-      // هنا نقوم بجلب القائمة
-      let voters = response.voters_list || [];
+      // // هنا نقوم بجلب القائمة
+      // let voters = response.voters_list || [];
 
-      // const sortedVoters = voters.reverse(); 
+    // 1. Safely extract the list
+      const rawVoters = response.voters_list || [];
 
+     // ✅ Sort by eligibleAt (Ascending: Oldest at top, Newest at bottom)
+      const sortedVoters = [...rawVoters].sort((a: any, b: any) => {
+        // Fallback to 0 if the timestamp doesn't exist for older records
+        const timeA = a.eligibleAt ? new Date(a.eligibleAt).getTime() : 0;
+        const timeB = b.eligibleAt ? new Date(b.eligibleAt).getTime() : 0;
+        
+        return timeA - timeB; 
+      });
       setData({
-    voters_list: [...(response.voters_list || [])].reverse(),
-      statistics: { ...response.statistics }
+        voters_list: sortedVoters,
+        statistics: { ...response.statistics }
       });
     } catch (err) {
       console.error("خطأ في جلب البيانات", err);

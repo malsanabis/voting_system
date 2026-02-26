@@ -61,6 +61,7 @@ async def register_voter(voter_data: VoterCreate, db: Any = Depends(get_database
     doc["isEligible"] = True      # staff-created voters are eligible
     doc["hasVoted"] = False
     doc["created_at"] = datetime.now()
+    doc["eligibleAt"] = datetime.now()
 
     result = await db.voters.insert_one(doc)
     doc["_id"] = result.inserted_id
@@ -70,7 +71,8 @@ async def register_voter(voter_data: VoterCreate, db: Any = Depends(get_database
 @router.get("/voters", response_model=list[VoterResponse])
 async def list_voters(db: Any = Depends(get_database)):
     voters = []
-    async for v in db.voters.find({}).sort("created_at", -1):  # Sort newest first
+ # ✅ Sort by the new timestamp. 1 = Ascending (Oldest first, Newest last)
+    async for v in db.voters.find({}).sort("eligibleAt", 1):  
         voters.append(VoterResponse.model_validate(v))
     return voters
 
@@ -86,6 +88,9 @@ async def update_voter(
 
     # 1. Start with eligibility
     update_data = {"isEligible": True}
+
+    if not existing.get("isEligible"):
+        update_data["eligibleAt"] = datetime.now()
 
     # 2. Get all sent fields using their Aliases (VoterName, MembershipType, etc.)
     sent_data = payload.model_dump(exclude_unset=True, by_alias=True)
